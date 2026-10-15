@@ -1,0 +1,53 @@
+PROYECTO JAVA: SOLITARIO + BUSCAMINAS EN CONSOLA + INTERFAZ INICIABLE
+
+ABRIR EN INTELLIJ IDEA
+1. Descomprimí Proyecto_Juegos_IntelliJ.zip.
+2. En IntelliJ elegí File > Open.
+3. Seleccioná la carpeta Proyecto_Juegos_IntelliJ (la que contiene pom.xml).
+4. Si pregunta, confiá en el proyecto y esperá a que cargue Maven.
+5. Abrí src/main/java/Start.java y ejecutá el botón verde junto a main.
+   Requiere JDK 17 o superior.
+
+ARCHIVOS
+- Start.java: punto de entrada del proyecto.
+- Iniciable.java: interfaz que exige el método void start().
+- MenuPrincipal.java: menú de consola extensible.
+- Solitario.java: Solitario simplificado de consola, cinco columnas, mazo, puntaje y tiempo.
+- Juego.java: Buscaminas de consola.
+- Tablero.java: lógica del Buscaminas.
+- Estadisticas.java: estadísticas y top 3 persistentes en records_juegos.txt.
+
+SOLITARIO (COMANDOS EN CONSOLA)
+- sacar: saca una carta del mazo.
+- retirar: retira la carta sacada del mazo y suma 10 puntos.
+- quitar 1, quitar 2, ... quitar 5: retira la carta visible de la columna indicada y suma 10 puntos.
+- estadisticas: muestra partidas, victorias, derrotas y top 3.
+- nuevo: abandona la partida actual y empieza una nueva.
+- ayuda: muestra los comandos.
+- salir: vuelve al menú principal.
+Cada columna inicia con una carta oculta y una visible. El mazo contiene las otras 42 cartas.
+El ranking de Solitario ordena por mayor puntaje; si hay empate, gana el menor tiempo.
+
+BUSCAMINAS (COMANDOS EN CONSOLA)
+- mostrar D5 (o m D5): descubrir casilla.
+- bandera D5 (o b D5): poner/quitar bandera.
+- estadisticas: ver estadísticas y top 3.
+- reiniciar: reiniciar la partida.
+- ayuda: ver instrucciones.
+- salir: volver al menú.
+El ranking de Buscaminas se ordena por victorias más rápidas.
+
+CÓMO AGREGAR OTRO JUEGO
+1. Copiá los archivos del juego a src/main/java.
+2. Asegurate de que la clase implemente Iniciable y tenga public void start().
+   Ejemplo:
+       public class Ajedrez implements Iniciable {
+           @Override public void start() { }
+       }
+3. En el constructor de MenuPrincipal agregá una línea como:
+       registrarJuego("Ajedrez", Ajedrez::new);
+   Si requiere parámetros, usá una lambda que los pase.
+4. Ejecutá Start.java. El juego aparecerá como opción del menú.
+
+Implementar Iniciable obliga a tener start(), pero no registra el juego automáticamente.
+El proyecto usa el paquete por defecto (sin declaraciones package) para facilitar la integración.
